@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Cards from '../Cards/Cards'
+import Card from '../Card/Card'
 import styles from './Countries.module.css';
 const Countries = ({data}) => {
     console.log(data)
@@ -23,7 +23,7 @@ const Countries = ({data}) => {
       />
       </div>
     <div className={styles.row}>
-      {data.length>0?(filteredCountries.map((items)=><Cards data={items}/>)):("No Data Available")}
+      {data.length>0?(filteredCountries.map((items)=><Card data={items}/>)):("No Data Available")}
     </div>
     </>
   )
