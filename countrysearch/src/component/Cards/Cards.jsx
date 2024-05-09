@@ -10,7 +10,7 @@ import Box from '@mui/material/Box'
 const Cards = ({data}) => {
   return (
     <div>
-        <Box className={styles.cardContainer}>
+        <Box className={styles.countryCard}>
       <Card className={styles.customCard}>
       <CardActionArea>
         <CardMedia

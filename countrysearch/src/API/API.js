@@ -11,7 +11,7 @@ export const getCountryFlag=async()=>{
     }
     catch(e)
     {
-        console.error('Error fetching data:', e.message);
+        console.log('Error fetching data:', e.message);
         
     }
 }
