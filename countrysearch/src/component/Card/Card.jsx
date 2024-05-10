@@ -5,7 +5,7 @@ const Card = ({data}) => {
     <div className={styles.countryCard}>
         
       <img className={styles.cardImage} src={data.flags.png} alt={data.flags.alt}/>
-      <h6>{data.name.common}</h6>
+      <h2>{data.name.common}</h2>
     </div>
   )
 }
