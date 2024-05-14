@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
  import Card from '../Card/Card'
-import styles from './Countries.module.css';
+import  './Countries.css';
 
 
 
@@ -64,7 +64,7 @@ const Countries = () => {
       <input className="headerInput" type='text' placeholder="Search for countries..." value={input} onChange={inputHandler}/>
     </div>
 
-    <div className={styles.row}>
+    <div className="row">
         {country.length>0 ? (filterData.map(items=> <Card imgUrl={items.flags.png} name={items.name.common} altUrl={items.flags.alt} />)):('')}
         
     </div>
