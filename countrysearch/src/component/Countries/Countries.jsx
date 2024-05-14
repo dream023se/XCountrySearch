@@ -1,32 +1,77 @@
-import React, { useState, useEffect } from 'react';
-import Card from '../Card/Card'
-import styles from './Countries.module.css';
-const Countries = ({data}) => {
-    console.log(data)
-    const [searchTerm, setSearchTerm] = useState('');
 
-    const handleSearch = (event) => {
-      setSearchTerm(event.target.value);
-    };
-    const filteredCountries = data.filter(country =>
-      country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
-      
-    );
+
+import React, { useState, useEffect } from 'react';
+ import Card from '../Card/Card'
+import styles from './Countries.module.css';
+
+
+
+
+const Countries = () => {
+    const[country,setCountry] = useState([]);
+    const[searchData,setSearchData] = useState([])
+    const[input,setInput] = useState('')
+
+    const inputHandler = (e) =>{
+        // let searchValue = e.target.value;
+        setInput(e.target.value);
+        // applyFilter(searchValue)
+    }
+    let filterData = country.filter(items=>items.name.common.toLowerCase().includes(input.toLowerCase()))
+  const getFlagData = async() =>{
+    try {
+        let result = await fetch('https://restcountries.com/v3.1/all')
+       let data = await result.json()
+       console.log(data);
+       setCountry(data);
+        
+    } catch (error) {
+        console.log(error)
+    }
+   
+    }
+
+    const applyFilter = (childValue) =>{
+      const flagData = JSON.parse(JSON.stringify(country))
+      childValue = childValue.trim()
+      if(childValue !== ''){
+        let filterData = flagData.filter(items=>items.name.common.toLowerCase().includes(childValue.toLowerCase()))
+        setSearchData(filterData)
+      }else{
+        setSearchData([])
+      }
+        if(searchData.length>0){
+          setCountry(searchData)
+        }else{
+          setCountry(country)
+        }
+
+    }
+    // useEffect(() =>{
+    //   applyFilter(input)
+    // },[input])    
+
+    useEffect(()=>{
+        getFlagData()
+        
+    },[])
   return (
     <>
-    <div className={styles.search}>
-      <input
-        type="text"
-        placeholder="Search for countries..."
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-      </div>
+    {/* <div>
+    <Header applyFilter={HeaderData}/>
+    </div> */}
+     <div className="header">
+      <input className="headerInput" type='text' placeholder="Search for countries..." value={input} onChange={inputHandler}/>
+    </div>
+
     <div className={styles.row}>
-      {data.length>0?(filteredCountries.map((items)=><Card data={items}/>)):("No Data Available")}
+        {country.length>0 ? (filterData.map(items=> <Card imgUrl={items.flags.png} name={items.name.common} altUrl={items.flags.alt} />)):('')}
+        
     </div>
     </>
+    
+    
   )
 }
 
-export default Countries;
+export default Countries

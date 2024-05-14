@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './Card.module.css';
-const Card = ({data}) => {
+const Card = ({imgUrl,name,altUrl}) => {
   return (
     <div className={styles.countryCard}>
         
-      <img className={styles.cardImage} src={data.flags.png} alt={data.flags.alt}/>
-      <h2>{data.name.common}</h2>
+      <img className={styles.cardImage} src={imgUrl} alt={altUrl}/>
+      <h2>{name}</h2>
     </div>
   )
 }
